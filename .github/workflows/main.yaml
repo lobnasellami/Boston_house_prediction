@@ -1,3 +1,38 @@
+# name: Build and Deploy to Render.com
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build_and_deploy:
+#     name: Build and Deploy
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v1
+
+#       - name: Login to Docker Hub
+#         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+#       - name: Build and push Docker image
+#         run: |
+#           docker buildx create --use
+#           docker buildx build --file Dockerfile --tag lobnasellami/price_pred_i:latest .
+#           docker push lobnasellami/price_pred_i:latest
+
+#       - name: Deploy to Render.com
+#         run: |
+#           curl -X POST "https://api.render.com/v1/deploys" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -d "{
+#             \"branch\": \"main\",
+#             \"serviceId\": \"your-service-id\"
+#           }"
+
 name: Build and Deploy to Render.com
 
 on:
@@ -20,6 +55,12 @@ jobs:
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
+      - name: Install Python and Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3 python3-pip
+          pip3 install Flask numpy conda matplotlib pandas scikit-learn gunicorn
+
       - name: Build and push Docker image
         run: |
           docker buildx create --use
@@ -30,5 +71,5 @@ jobs:
         run: |
           curl -X POST "https://api.render.com/v1/deploys" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -d "{
             \"branch\": \"main\",
-            \"serviceId\": \"your-service-id\"
+            \"serviceId\": \"${{ secrets.SERVICE_ID }}\"
           }"

@@ -4,3 +4,4 @@ conda
 matplotlib
 pandas
 scikit-learn
+gunicorn

@@ -56,7 +56,7 @@ jobs:
           export PATH="$HOME/miniconda/bin:$PATH"
           conda init bash
           source ~/.bashrc
-          conda create -n myenv python=3.x  # Create a Conda environment with your desired Python version
+          conda create -n myenv python=3.7  # Create a Conda environment with your desired Python version
           conda activate myenv
         shell: bash
 

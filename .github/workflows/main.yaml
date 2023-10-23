@@ -60,7 +60,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip
           pip3 install -r requirements.txt
-        working-directory: /path/to/your/project  # Replace with the path to your project folder
+        working-directory: /app  # Replace with the path to your project folder
 
       - name: Build and push Docker image
         run: |

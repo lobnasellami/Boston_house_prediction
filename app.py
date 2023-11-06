@@ -14,7 +14,7 @@ def home() :
 @app.route('/predict_api', methods=['POST'])
 def predict_api():
     data=request.json['data']
-    print(f"**********{list(data.values())}****")
+    print(f"*************{list(data.values())}****")
     print(np.array(list(data.values())).reshape(1,-1))
     new_input=scaler.transform(np.array(list(data.values())).reshape(1,-1))
     output=model.predict(new_input)

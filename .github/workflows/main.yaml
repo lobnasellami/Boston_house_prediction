@@ -33,7 +33,7 @@
 #             \"serviceId\": \"your-service-id\"
 #           }"
 
-name: Build and Deploy to Render.com
+name: Build and Deploy to Render.com cloud
 
 on:
   push:

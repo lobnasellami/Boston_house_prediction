@@ -65,7 +65,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker buildx create --use
-          docker buildx build --file Dockerfile --tag lobnasellami/price_pred_i:v1 --push .
+          docker buildx build --file Dockerfile --tag lobnasellami/price_pred_i --push .
           docker push lobnasellami/price_pred_i:v1
 
       # - name: Deploy to Render.com

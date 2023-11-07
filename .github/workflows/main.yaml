@@ -67,8 +67,16 @@ jobs:
           docker buildx build --file Dockerfile --tag lobnasellami/price_pred_i:v1 --push .
           docker push lobnasellami/price_pred_i:v1
 
-      - name: Deploy to Render.com
-        run: |
-          curl -X POST "https://api.render.com/v1/deploys" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -d "{
-            \"branch\": \"main\",
-            \"serviceId\": \"${{ secrets.YOUR_RENDER_SERVICE_ID_SECRET }}\"
+      # - name: Deploy to Render.com
+      #   run: |
+      #     curl -X POST "https://api.render.com/v1/deploys" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -d "{
+      #       \"branch\": \"main\",
+      #       \"serviceId\": \"${{ secrets.YOUR_RENDER_SERVICE_ID_SECRET }}\"
+
+- name: Deploy to Render.com
+  run: |
+    curl -X POST "https://api.render.com/v1/deploys" -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" -d "{
+      \"branch\": \"main\",
+      \"serviceId\": \"${{ secrets.YOUR_RENDER_SERVICE_ID_SECRET }}\",
+      \"image\": \"lobnasellami/price_pred_i:v1\"
+    }"
